@@ -35,7 +35,7 @@ function App() {
     <>
       <Router>
         
-        <nav className="flex flex-row bg-gray-400 position-sticky sticky-top">
+        <nav className="flex flex-row bg-gray-400 sticky top-0 z-10">
           <Link className="" to="/">Bakery</Link>
           <div className="ms-auto mr-3">
             <Link className="" to="/cart">Cart ({cartItems.length})</Link>
