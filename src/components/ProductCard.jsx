@@ -2,7 +2,8 @@ import React from 'react';
 
 const ProductCard = ({ product, onAddToCart }) => {
   return (
-    <div className="m-2" style={{ width: '18rem' }}>
+    <div className='flex flex-row'>
+    <div className="m-2 flex flex-col" style={{ width: '18rem' }}>
       <img src={product.image} className="" alt={product.name}/>
       <div className="">
         <h5 className="">{product.name}</h5>
@@ -15,7 +16,7 @@ const ProductCard = ({ product, onAddToCart }) => {
           Add to Cart
         </button>
       </div>
-    </div>
+    </div></div>
   );
 };
 

@@ -57,14 +57,14 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
               </td>
               <td>${(item.price * item.quantity).toFixed(2)}</td>
               <td>
-                <button className="btn btn-danger btn-sm" onClick={() => handleRemove(item.id)}>X</button>
+                <button className="" onClick={() => handleRemove(item.id)}>X</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       <h4>Total: ${total.toFixed(2)}</h4>
-      <button className="btn btn-success" onClick={() => navigate('/checkout')}>Proceed to Checkout</button>
+      <button className="" onClick={() => navigate('/checkout')}>Proceed to Checkout</button>
     </div>
   );
 };
