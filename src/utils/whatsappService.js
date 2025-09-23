@@ -17,7 +17,7 @@ ${orderData.items.map((item) => `- ${item.name} x${item.quantity} ($${item.price
 Total: $${orderData.totalAmount.toFixed(2)}
   `;
 
-  // WhatsApp Web API link
+  // WhatsApp link
   const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank");
 };
