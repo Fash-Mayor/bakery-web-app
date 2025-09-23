@@ -4,7 +4,7 @@ import { products } from '../data/products';
 
 const ProductCatalog = ({ onAddToCart }) => {
   return (
-    <div className="d-flex flex-wrap justify-content-center">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-6 justify-items-center">
       {products.map(product => (
         <ProductCard 
           key={product.id} 

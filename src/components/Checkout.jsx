@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { sendOrderEmail } from '../utils/emailService';
 import { sendWhatsAppMessage } from '../utils/whatsappService';
@@ -65,78 +64,83 @@ const Checkout = ({ cartItems, setCartItems }) => {
     } catch (error) {
       toast.error('An error occurred while placing your order.');
       console.log(error)
-
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Checkout</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Full Name *</label>
+    <div className="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 mt-8 mb-8">
+      <h2 className="text-2xl font-bold mb-6 text-center text-orange-600">Checkout</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">Full Name *</label>
           <input
             name="user_name"
             type="text"
-            className="form-control"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
             required
             value={formData.user_name}
             onChange={handleChange}
           />
         </div>
 
-        <div className="mb-3">
-          <label className="form-label">Email Address *</label>
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">Email Address *</label>
           <input
             name="user_email"
             type="email"
-            className="form-control"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
             required
             value={formData.user_email}
             onChange={handleChange}
           />
         </div>
 
-        <div className="mb-3">
-          <label className="form-label">Phone Number *</label>
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">Phone Number *</label>
           <input
             name="user_phone"
             type="tel"
-            className="form-control"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
             required
             value={formData.user_phone}
             onChange={handleChange}
           />
         </div>
 
-        <div className="mb-3">
-          <label className="form-label">Delivery Address *</label>
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">Delivery Address *</label>
           <textarea
             name="user_address"
             rows="3"
-            className="form-control"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
             required
             value={formData.user_address}
             onChange={handleChange}
           />
         </div>
 
-        <div className="mb-3">
-          <label className="form-label">Special Instructions</label>
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">Special Instructions</label>
           <textarea
             name="specialInstructions"
             rows="2"
-            className="form-control"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
             value={formData.specialInstructions}
             onChange={handleChange}
           />
         </div>
 
-        <h4>Total: ${totalAmount.toFixed(2)}</h4>
+        <h4 className="text-xl font-bold text-right mb-4">
+          Total: <span className="text-red-500">${totalAmount.toFixed(2)}</span>
+        </h4>
 
-        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+        <button
+          type="submit"
+          className="bg-orange-500 text-white font-semibold px-6 py-3 rounded shadow hover:bg-orange-600 transition"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? 'Placing Order...' : 'Place Order'}
         </button>
       </form>
