@@ -42,7 +42,7 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
           <div key={item.id} className="bg-white rounded-xl shadow-lg flex items-center p-4">
             <div className="flex-1">
               <h5 className="text-lg font-semibold">{item.name}</h5>
-              <p className="text-red-500 font-bold text-lg">${item.price.toFixed(2)}</p>
+              <p className="text-red-500 font-bold text-lg">₦{item.price.toFixed(2)}</p>
             </div>
             <div className="flex items-center gap-2">
               <input
@@ -53,7 +53,7 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
                 className="w-16 px-2 py-1 border rounded text-center"
               />
               <span className="text-gray-700 font-medium">x</span>
-              <span className="text-lg font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+              <span className="text-lg font-semibold">₦{(item.price * item.quantity).toFixed(2)}</span>
             </div>
             <button
               className="ml-4 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition"
@@ -66,7 +66,7 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
         ))}
       </div>
       <div className="flex justify-between items-center mt-8">
-        <h4 className="text-xl font-bold">Total: <span className="text-red-500">${total.toFixed(2)}</span></h4>
+        <h4 className="text-xl font-bold">Total: <span className="text-red-500">₦{total.toFixed(2)}</span></h4>
         <button
           className="bg-orange-500 text-white px-6 py-2 rounded shadow hover:cursor-pointer hover:bg-orange-600 transition"
           onClick={() => navigate('/checkout')}
@@ -74,7 +74,7 @@ const ShoppingCart = ({ cartItems, setCartItems }) => {
           Proceed to Checkout
         </button>
       </div>
-      <div className="flex flex-col items-center justify-center h-12 mt-6">
+      <div className="flex flex-col items-center justify-center h-12 mt-6 mb-9 sm:mb-0">
         <Link to="/" className="bg-orange-500 text-white px-6 py-2 rounded shadow hover:bg-orange-600 transition">
           Keep Shopping
         </Link>
