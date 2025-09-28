@@ -71,3 +71,10 @@ bakery-web-app/
 ├── public/assets/      # Product images
 └── ...
 ```
+
+## Updates
+
+1. Change Fonts.
+2. A categories section containing sections like `Pastries`, `Cakes`, `Bread` (and a `shop` section) .
+3. A minimizable pop-up asking users how to improve the site (collapsable).
+4. Add a `Product page`. This page will contain details abou individual products.
