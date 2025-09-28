@@ -133,7 +133,7 @@ const Checkout = ({ cartItems, setCartItems }) => {
         </div>
 
         <h4 className="text-xl font-bold text-right mb-4">
-          Total: <span className="text-red-500">${totalAmount.toFixed(2)}</span>
+          Total: <span className="text-red-500">₦{totalAmount.toFixed(2)}</span>
         </h4>
 
         <button
