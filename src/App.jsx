@@ -6,6 +6,9 @@ import ShoppingCart from "./components/ShoppingCart";
 // import Intro from './components/intro';
 import Checkout from "./components/Checkout";
 import PlaceOrder from "./utils/PlaceOrder";
+import Categories from './components/category';
+import CategoryProducts from './pages/CategoryProducts';
+import ProductDetail from './pages/ProductDetail';
 import { FaHome } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 
@@ -81,9 +84,16 @@ function App() {
           <Route
             path="/cart"
             element={
+              <>
+              <Categories/>
               <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
+              </>
             }
           />
+          <Route path="/category/:category" element={<CategoryProducts onAddToCart={handleAddToCart} />} />
+
+        <Route path="/product/:id" element={<ProductDetail onAddToCart={handleAddToCart} />} />
+        {/* <Route path="/cart" element={<ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />} /> */}
           <Route
             path="/checkout"
             element={
