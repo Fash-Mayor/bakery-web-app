@@ -1,11 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product, onAddToCart }) => {
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden max-w-72 flex flex-col mb-4">
       <Link to={`/product/${product.id}`}>
-        <img src={product.image} alt={product.name} className="h-48 max-w-full object-cover" />
+        <img src={product.image} alt={product.name} className="h-48 w-full object-cover" />
       </Link>
       <div className="p-4 flex flex-col flex-grow">
         <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>

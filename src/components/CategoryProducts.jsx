@@ -1,7 +1,6 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
-import ProductCard from '../components/ProductCard';
+import ProductCard from './ProductCard';
 
 const CategoryProducts = ({ onAddToCart }) => {
   const { category } = useParams();
