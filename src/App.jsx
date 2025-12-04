@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import ProductCatalog from "./components/ProductCatalog";
-import ShoppingCart from "./components/ShoppingCart";
-// import Intro from './components/intro';
-import Checkout from "./components/Checkout";
-import PlaceOrder from "./utils/PlaceOrder";
+import { ProductCatalog, ShoppingCart,  Checkout,  Categories,  CategoryProducts,  ProductDetail, Feedback } from './components';
 import { FaHome } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
-  // const [showIntro, setShowIntro] = useState(true); Everything about the intro has been commented. ######-----#####Intro.jsx is inactive######----######
 
   // add to cart
   const handleAddToCart = (product) => {
@@ -37,14 +32,6 @@ function App() {
     }
   }, []);
 
-  // if (showIntro) {
-  //   return (
-  //   <div style={{ minHeight: '100vh', width: '100vw', overflow: 'hidden', position: 'relative' }}>
-  //     <Intro onEnter={() => setShowIntro(false)} />
-  //   </div>
-  // );
-  // }
-
   return (
     <>
       <Router>
@@ -66,13 +53,14 @@ function App() {
                 Cart ({cartItems.length})
               </span>
             </Link>
+            <Link to="/feedback" className="flex flex-col items-center sm:flex-row sm:gap-2">
+    <span className="text-xs sm:text-base sm:inline">Feedback</span>
+  </Link>
           </nav>
 
-          {/* <div className="sm:hidden max-w-full w-full flex justify-start items-center p-2 text-xl font-semibold">
-            <h1>Hello there!</h1>
-          </div> */}
-          
         </header>
+        
+
         <Routes>
           <Route
             path="/"
@@ -81,14 +69,30 @@ function App() {
           <Route
             path="/cart"
             element={
-              <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
+              <>
+                <Categories />
+                <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
+              </>
             }
+          />
+          <Route 
+            path="/category/:category" 
+            element={<CategoryProducts onAddToCart={handleAddToCart} />
+            } 
+          />
+          <Route 
+            path="/product/:id" 
+            element={<ProductDetail onAddToCart={handleAddToCart} />
+            } 
           />
           <Route
             path="/checkout"
             element={
               <Checkout cartItems={cartItems} setCartItems={setCartItems} />
             }
+          />
+          <Route path="/feedback"
+            element={<Feedback />}
           />
         </Routes>
       </Router>
