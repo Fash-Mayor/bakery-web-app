@@ -35,10 +35,10 @@ function App() {
     <>
       <Router>
         <header>
-          {/* CONTAINER: becomes row on sm+ */}
-          <div className="sm:flex sm:flex-row sm:items-start sm:gap-6">
-            {/* PAGE TOP (full width on mobile, 70% on sm+) */}
-            <div className="w-full sm:w-[70%] bg-white px-4 py-6 border-b-2 border-orange-100">
+          {/* CONTAINER: becomes row on lg+ */}
+          <div className="lg:flex lg:flex-row lg:items-start lg:gap-6">
+            {/* PAGE TOP (full width on mobile, 70% on lg+) */}
+            <div className="w-full lg:w-[70%] bg-white px-4 py-6">
               <div className="max-w-4xl mx-auto">
                 <h1 className="text-3xl font-bold mb-2">Hi there!</h1>
                 <p className="text-gray-600 mb-4">What are you looking for today?</p>
@@ -49,37 +49,40 @@ function App() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full px-4 py-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 bg-gray-50"
                 />
-                {/* on sm+ the nav links should appear under the search bar visually:
-                    keep the Categories/links area here if you want them directly under search
-                    or leave nav separate below. */}
               </div>
             </div>
 
-            {/* NAV (full width fixed bottom on mobile, 30% column on sm+) */}
-            <nav className="w-full fixed bottom-0 left-0 z-10 bg-white shadow px-4 py-3 sm:static sm:w-[30%] sm:shadow-none sm:bg-transparent sm:px-6 sm:py-0">
-              <div className="max-w-4xl mx-auto sm:mx-0 sm:pl-4">
-                <div className="flex justify-around sm:flex-col sm:space-y-4 sm:justify-start">
+            {/* NAV (mobile: fixed bottom row; lg: static horizontal row with equal widths) */}
+            <nav className="w-full fixed bottom-0 left-0 z-10 bg-white shadow px-4 py-3 lg:static lg:bg-transparent lg:shadow-none lg:px-0 lg:py-0">
+              <div className="max-w-screen-xl mx-auto">
+                <div className="flex justify-around items-center lg:flex-row lg:justify-between lg:items-stretch">
                   <Link
                     to="/"
-                    className="flex flex-col items-center sm:flex-row sm:items-center sm:gap-2 hover:text-orange-600 transition"
+                    className="flex-1 text-center hover:text-orange-600 transition px-2"
                   >
-                    <FaHome className="text-2xl sm:text-xl text-orange-600" />
-                    <span className="text-xs sm:text-base ml-0 sm:ml-2">Home</span>
+                    <div className="inline-flex flex-col items-center lg:flex-row lg:justify-center lg:gap-2">
+                      <FaHome className="text-2xl lg:text-xl text-orange-600" />
+                      <span className="text-xs lg:text-base">Home</span>
+                    </div>
                   </Link>
 
                   <Link
                     to="/cart"
-                    className="flex flex-col items-center sm:flex-row sm:items-center sm:gap-2 hover:text-orange-600 transition"
+                    className="flex-1 text-center hover:text-orange-600 transition px-2"
                   >
-                    <IoCart className="text-2xl sm:text-xl text-orange-600" />
-                    <span className="text-xs sm:text-base ml-0 sm:ml-2">Cart ({cartItems.length})</span>
+                    <div className="inline-flex flex-col items-center lg:flex-row lg:justify-center lg:gap-2">
+                      <IoCart className="text-2xl lg:text-xl text-orange-600" />
+                      <span className="text-xs lg:text-base">Cart ({cartItems.length})</span>
+                    </div>
                   </Link>
 
                   <Link
                     to="/feedback"
-                    className="flex flex-col items-center sm:flex-row sm:items-center sm:gap-2 hover:text-orange-600 transition"
+                    className="flex-1 text-center hover:text-orange-600 transition px-2"
                   >
-                    <span className="text-xs sm:text-base ml-0 sm:ml-2">Feedback</span>
+                    <div className="inline-flex flex-col items-center lg:flex-row lg:justify-center lg:gap-2">
+                      <span className="text-xs lg:text-base">Feedback</span>
+                    </div>
                   </Link>
                 </div>
               </div>
@@ -87,7 +90,7 @@ function App() {
           </div>
         </header>
 
-        <main className="mb-24 sm:mb-0">
+        <main className="mb-24 lg:mb-0">
           <Routes>
             <Route
               path="/"
