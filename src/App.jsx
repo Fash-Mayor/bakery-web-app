@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
-import { ProductCatalog, ShoppingCart, Checkout, Categories, CategoryProducts, ProductDetail, Feedback, Footer } from './components';
+import { ProductCatalog, ShoppingCart, Checkout, ProductDetail, Feedback, Footer, Shop } from './components';
 import { FaHome } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
+import { FaShop } from "react-icons/fa6";
+import { MdFeedback } from "react-icons/md";
 
 // Move PageHeader out of App to keep component identity stable
 const PageHeader = ({ searchQuery, setSearchQuery, cartItems }) => {
@@ -44,6 +46,16 @@ const PageHeader = ({ searchQuery, setSearchQuery, cartItems }) => {
               </Link>
 
               <Link
+                to="/shop"
+                className="flex-1 text-center hover:text-orange-600 transition px-2"
+              >
+                <div className="inline-flex flex-col items-center lg:flex-row lg:justify-center lg:gap-2">
+                  <FaShop className="text-2xl lg:text-xl text-orange-600" />
+                  <span className="text-xs lg:text-base">Shop</span>
+                </div>
+              </Link>
+
+              <Link
                 to="/cart"
                 className="flex-1 text-center hover:text-orange-600 transition px-2"
               >
@@ -58,6 +70,7 @@ const PageHeader = ({ searchQuery, setSearchQuery, cartItems }) => {
                 className="flex-1 text-center hover:text-orange-600 transition px-2"
               >
                 <div className="inline-flex flex-col items-center lg:flex-row lg:justify-center lg:gap-2">
+                  <MdFeedback className="text-2xl lg:text-xl text-orange-600"/>
                   <span className="text-xs lg:text-base">Feedback</span>
                 </div>
               </Link>
@@ -112,14 +125,9 @@ function App() {
               path="/cart"
               element={
                 <>
-                  <Categories />
                   <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
                 </>
               }
-            />
-            <Route
-              path="/category/:category"
-              element={<CategoryProducts onAddToCart={handleAddToCart} />}
             />
             <Route
               path="/product/:id"
@@ -130,6 +138,7 @@ function App() {
               element={<Checkout cartItems={cartItems} setCartItems={setCartItems} />}
             />
             <Route path="/feedback" element={<Feedback />} />
+            <Route path="/shop" element={<Shop onAddToCart={handleAddToCart} />} />
           </Routes>
         </main>
         <Footer />
