@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
-import { ProductCatalog, ShoppingCart, Checkout, Categories, CategoryProducts, ProductDetail, Feedback, Footer, Shop } from './components';
+import { ProductCatalog, ShoppingCart, Checkout, ProductDetail, Feedback, Footer, Shop } from './components';
 import { FaHome } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 import { FaShop } from "react-icons/fa6";
@@ -125,14 +125,9 @@ function App() {
               path="/cart"
               element={
                 <>
-                  <Categories />
                   <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
                 </>
               }
-            />
-            <Route
-              path="/category/:category"
-              element={<CategoryProducts onAddToCart={handleAddToCart} />}
             />
             <Route
               path="/product/:id"
