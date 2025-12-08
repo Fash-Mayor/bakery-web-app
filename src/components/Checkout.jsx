@@ -14,6 +14,10 @@ const Checkout = ({ cartItems, setCartItems }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Order review modal state
+  const [showReview, setShowReview] = useState(false);
+  const [orderPreview, setOrderPreview] = useState(null);
+
   const totalAmount = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
@@ -23,15 +27,14 @@ const Checkout = ({ cartItems, setCartItems }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  // Open review modal instead of immediately sending
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (cartItems.length === 0) {
       toast.error('Your cart is empty!');
       return;
     }
-
-    setIsSubmitting(true);
 
     const orderData = {
       customerName: formData.user_name,
@@ -43,12 +46,19 @@ const Checkout = ({ cartItems, setCartItems }) => {
       totalAmount,
     };
 
-    try {
-      const emailResult = await sendOrderEmail(orderData);
+    setOrderPreview(orderData);
+    setShowReview(true);
+  };
 
+  // Called when user confirms on review modal
+  const handleConfirmOrder = async () => {
+    if (!orderPreview) return;
+    setIsSubmitting(true);
+    try {
+      const emailResult = await sendOrderEmail(orderPreview);
       if (emailResult.status === 200) {
-        sendWhatsAppMessage(orderData);
-        toast.success('Order placed successfully! Please confirm via WhatsApp.');
+        sendWhatsAppMessage(orderPreview);
+        toast.success('Order placed successfully! Please confirm via your Email and WhatsApp.');
         setCartItems([]);
         setFormData({
           user_name: '',
@@ -58,12 +68,13 @@ const Checkout = ({ cartItems, setCartItems }) => {
           specialInstructions: ''
         });
         localStorage.removeItem('cart');
+        setShowReview(false);
       } else {
         toast.error('Failed to send order email.');
       }
     } catch (error) {
       toast.error('An error occurred while placing your order.');
-      console.log(error)
+      console.error(error);
     } finally {
       setIsSubmitting(false);
     }
@@ -110,7 +121,7 @@ const Checkout = ({ cartItems, setCartItems }) => {
         </div>
 
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">Delivery Address *</label>
+          <label className="block text-gray-700 font-semibold mb-2">Delivery Address * (within Lagos and Ogun)</label>
           <textarea
             name="user_address"
             rows="3"
@@ -144,6 +155,68 @@ const Checkout = ({ cartItems, setCartItems }) => {
           {isSubmitting ? 'Placing Order...' : 'Place Order'}
         </button>
       </form>
+      {/* Order Review Modal */}
+      {showReview && orderPreview && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setShowReview(false)} />
+          <div className="relative bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 p-6 z-10">
+            <h3 className="text-xl font-bold mb-4">Review Your Order</h3>
+
+            <div className="space-y-4 max-h-72 overflow-auto pb-2">
+              <div>
+                <h4 className="font-semibold mb-2">Customer</h4>
+                <p className="text-gray-700">{orderPreview.customerName}</p>
+                <p className="text-gray-600 text-sm">{orderPreview.customerEmail} • {orderPreview.customerPhone}</p>
+                <p className="text-gray-600 text-sm mt-1">{orderPreview.deliveryAddress}</p>
+                {orderPreview.specialInstructions && <p className="text-gray-600 text-sm italic mt-1">Note: {orderPreview.specialInstructions}</p>}
+              </div>
+
+              <div>
+                <h4 className="font-semibold mb-2">Items</h4>
+                <ul className="divide-y">
+                  {orderPreview.items.map(item => (
+                    <li key={item.id} className="py-2 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <img src={item.image} alt={item.name} className="w-14 h-14 object-cover rounded" />
+                        <div>
+                          <div className="font-medium">{item.name}</div>
+                          <div className="text-sm text-gray-500">Qty: {item.quantity}</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-semibold">₦{(item.price * item.quantity).toFixed(2)}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="flex justify-between items-center pt-2 border-t">
+                <div className="text-lg font-bold">Total</div>
+                <div className="text-lg font-bold text-red-500">₦{orderPreview.totalAmount.toFixed(2)}</div>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3 mt-6">
+              <button
+                className="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200"
+                onClick={() => setShowReview(false)}
+                type="button"
+              >
+                Back
+              </button>
+              <button
+                className="px-4 py-2 rounded bg-orange-500 text-white hover:bg-orange-600"
+                onClick={handleConfirmOrder}
+                type="button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Placing...' : 'Confirm & Place Order'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <ToastContainer />
     </div>
   );
