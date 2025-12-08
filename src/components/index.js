@@ -7,6 +7,7 @@ import CategoryProducts from "./CategoryProducts";
 import ProductDetail from "./ProductDetail";
 import Feedback from "./feedback";
 import Footer from "./footer";
+import Shop from "./shop";
 
 export {
     ProductCatalog,
@@ -17,4 +18,5 @@ export {
     ProductDetail,
     Feedback,
     Footer,
+    Shop,
 }

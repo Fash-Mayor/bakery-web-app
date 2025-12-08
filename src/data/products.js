@@ -99,5 +99,35 @@ export const products = [
     ingredients: ["flour", "blueberries", "sugar", "eggs"],
     allergens: ["gluten", "eggs"]
   },
+  {
+    id: 11,
+    name: "Sourdough Bread",
+    price: 8000,
+    category: "Bread",
+    image: "/assets/Image-1.jpg",
+    description: "Artisanal sourdough bread with a crispy crust.",
+    ingredients: ["flour", "water", "salt", "starter"],
+    allergens: ["gluten"]
+  },
+  {
+    id: 12,
+    name: "Whole Wheat Bread",
+    price: 6000,
+    category: "Bread",
+    image: "/assets/Image-2.jpg",
+    description: "Healthy whole wheat bread.",
+    ingredients: ["whole wheat flour", "water", "yeast", "salt"],
+    allergens: ["gluten"]
+  },
+  {
+    id: 13,
+    name: "Baguette",
+    price: 5000,
+    category: "Bread",
+    image: "/assets/Image-3.jpg",
+    description: "Classic French baguette.",
+    ingredients: ["flour", "water", "yeast", "salt"],
+    allergens: ["gluten"]
+  },
   // Add more products...
 ];
