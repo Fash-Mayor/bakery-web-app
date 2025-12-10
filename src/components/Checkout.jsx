@@ -10,7 +10,8 @@ const Checkout = ({ cartItems, setCartItems }) => {
     user_email: '',
     user_phone: '',
     user_address: '',
-    specialInstructions: ''
+    specialInstructions: '',
+    deliveryDate: '' // <-- added
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -36,11 +37,18 @@ const Checkout = ({ cartItems, setCartItems }) => {
       return;
     }
 
+    // simple validation: require delivery date
+    if (!formData.deliveryDate) {
+      toast.error('Please select a delivery date.');
+      return;
+    }
+
     const orderData = {
       customerName: formData.user_name,
       customerEmail: formData.user_email,
       customerPhone: formData.user_phone,
       deliveryAddress: formData.user_address,
+      deliveryDate: formData.deliveryDate, // <-- include date
       specialInstructions: formData.specialInstructions,
       items: cartItems,
       totalAmount,
@@ -58,14 +66,15 @@ const Checkout = ({ cartItems, setCartItems }) => {
       const emailResult = await sendOrderEmail(orderPreview);
       if (emailResult.status === 200) {
         sendWhatsAppMessage(orderPreview);
-        toast.success('Order placed successfully! Please confirm via your Email and WhatsApp.');
+        toast.success('Order placed successfully! Please confirm via WhatsApp.');
         setCartItems([]);
         setFormData({
           user_name: '',
           user_email: '',
           user_phone: '',
           user_address: '',
-          specialInstructions: ''
+          specialInstructions: '',
+          deliveryDate: ''
         });
         localStorage.removeItem('cart');
         setShowReview(false);
@@ -79,6 +88,8 @@ const Checkout = ({ cartItems, setCartItems }) => {
       setIsSubmitting(false);
     }
   };
+
+  const today = new Date().toISOString().split('T')[0]; // min date for date input
 
   return (
     <div className="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 mt-8 mb-8">
@@ -109,7 +120,7 @@ const Checkout = ({ cartItems, setCartItems }) => {
         </div>
 
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">Phone Number *</label>
+          <label className="block text-gray-700 font-semibold mb-2">Phone Number * (WhatsApp)</label>
           <input
             name="user_phone"
             type="tel"
@@ -143,6 +154,19 @@ const Checkout = ({ cartItems, setCartItems }) => {
           />
         </div>
 
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">Delivery Date *</label>
+          <input
+            name="deliveryDate"
+            type="date"
+            min={today}
+            required
+            value={formData.deliveryDate}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white"
+          />
+        </div>
+
         <h4 className="text-xl font-bold text-right mb-4">
           Total: <span className="text-red-500">₦{totalAmount.toFixed(2)}</span>
         </h4>
@@ -155,6 +179,7 @@ const Checkout = ({ cartItems, setCartItems }) => {
           {isSubmitting ? 'Placing Order...' : 'Place Order'}
         </button>
       </form>
+
       {/* Order Review Modal */}
       {showReview && orderPreview && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -168,6 +193,7 @@ const Checkout = ({ cartItems, setCartItems }) => {
                 <p className="text-gray-700">{orderPreview.customerName}</p>
                 <p className="text-gray-600 text-sm">{orderPreview.customerEmail} • {orderPreview.customerPhone}</p>
                 <p className="text-gray-600 text-sm mt-1">{orderPreview.deliveryAddress}</p>
+                <p className="text-gray-700 font-medium mt-2">Delivery Date: {new Date(orderPreview.deliveryDate).toLocaleDateString()}</p>
                 {orderPreview.specialInstructions && <p className="text-gray-600 text-sm italic mt-1">Note: {orderPreview.specialInstructions}</p>}
               </div>
 
@@ -217,6 +243,7 @@ const Checkout = ({ cartItems, setCartItems }) => {
           </div>
         </div>
       )}
+
       <ToastContainer />
     </div>
   );
