@@ -7,23 +7,18 @@ export const sendOrderEmail = async (orderData) => {
   const publicKey = import.meta.env.VITE_PUBLIC_KEY;
 
   if (!serviceId || !templateId || !publicKey) {
-    throw new Error("EmailJS serviceId, templateId, or publicKey is missing");
+    throw new Error('EmailJS config missing');
   }
 
-  // Map your order details to match EmailJS template variables
   const templateParams = {
     customer_name: orderData.customerName,
     customer_email: orderData.customerEmail,
     customer_phone: orderData.customerPhone,
     delivery_address: orderData.deliveryAddress,
-    special_instructions: orderData.specialInstructions || "None",
-
-    // Build readable order summary
-    order_items: orderData.items
-      .map((item) => `${item.name} x${item.quantity} ($${item.price})`)
-      .join(", "),
-
-    total: `$${orderData.totalAmount.toFixed(2)}`
+    delivery_date: orderData.deliveryDate, // <-- add this (match your EmailJS template variable)
+    special_instructions: orderData.specialInstructions || '',
+    items: orderData.items.map(i => `${i.name} x${i.quantity} (₦${i.price})`).join('\n'),
+    total: orderData.totalAmount
   };
 
   return emailjs.send(serviceId, templateId, templateParams, publicKey);

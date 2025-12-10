@@ -8,7 +8,8 @@ New Order 🚀
 Name: ${orderData.customerName}
 Email: ${orderData.customerEmail}
 Phone: ${orderData.customerPhone}
-Address: ${orderData.deliveryAddress}
+Delivery Address: ${orderData.deliveryAddress}
+Delivery Date: ${orderData.deliveryDate}
 Instructions: ${orderData.specialInstructions || "None"}
 
 Items:
