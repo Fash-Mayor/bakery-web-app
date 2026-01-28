@@ -18,12 +18,13 @@ const ProductDetail = ({ onAddToCart }) => {
 
   return (
     <div className="max-w-7xl mx-auto p-4">
+      <div className='shadow-md'>
       <button
         className="text-orange-500 font-semibold mb-6 hover:text-orange-600 transition underline hover:no-underline"
         onClick={() => navigate(-1)}
       >
         ← Back
-      </button>
+      </button></div>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="md:w-1/2">
           <img
