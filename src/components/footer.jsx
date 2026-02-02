@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaInstagram, FaFacebookF, FaTwitter, FaTiktok, FaArrowUp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -51,7 +50,7 @@ const Footer = () => {
                 {/* Delivery Information */}
                 <div className="mt-8 pt-8 border-t border-gray-700">
                     <h4 className="text-lg font-semibold mb-4">Delivery Information</h4>
-                    <p className="text-gray-300">We deliver within a 10-mile radius. Delivery fee: $5. Free pickup available at our location.</p>
+                    <p className="text-gray-300">We deliver within a 10-mile radius. Delivery fee: ₦1000. Free pickup available at our location.</p>
                 </div>
 
                 {/* Social Media and Payment */}
