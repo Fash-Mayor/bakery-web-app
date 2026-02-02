@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import { ProductCatalog, ShoppingCart, Checkout, ProductDetail, Feedback, Footer, Shop } from './components';

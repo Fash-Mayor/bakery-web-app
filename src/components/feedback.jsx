@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { sendFeedbackEmail } from '../utils/emailService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,7 +47,7 @@ const Feedback = () => {
                     type="email"
                     className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                <select
+                {/* <select
                     name="rating"
                     value={form.rating}
                     onChange={handleChange}
@@ -58,7 +58,7 @@ const Feedback = () => {
                     <option value="3">⭐️⭐️⭐️</option>
                     <option value="2">⭐️⭐️</option>
                     <option value="1">⭐️</option>
-                </select>
+                </select> */}
                 <textarea
                     name="message"
                     value={form.message}
