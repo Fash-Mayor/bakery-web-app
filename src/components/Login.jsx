@@ -73,7 +73,7 @@ const Login = () => {
     }
   };
 
-  const { getSupabaseClient } = require("../utils/dataService");
+  const { getSupabaseClient } = ("../utils/dataService");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-orange-50 py-12 px-4 sm:px-6 lg:px-8 mb-20 lg:mb-0">
