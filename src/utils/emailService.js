@@ -34,10 +34,10 @@ export const sendFeedbackEmail = async (feedback) => {
   }
 
   const templateParams = {
-    user_name: feedback.name || 'Anonymous',
-    user_email: feedback.email || 'Not provided',
+    user_name: feedback.name || 'Null',
+    user_email: feedback.email || 'Null',
     message: feedback.message,
-    rating: feedback.rating || '5',
+    // rating: feedback.rating || '5',
   };
 
   return emailjs.send(serviceId, templateId, templateParams, publicKey);
