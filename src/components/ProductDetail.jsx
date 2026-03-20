@@ -86,7 +86,7 @@ const ProductDetail = ({ onAddToCart }) => {
               <div className="mt-4 p-4 bg-gradient-to-r from-orange-400 to-orange-500 rounded-lg shadow-md">
                 <p className="text-white text-sm font-semibold">Baked by</p>
                 <p className="text-white font-bold text-lg">
-                  {product.baker_name || "Local Baker"}
+                  {product.baker.shop_name || "Local Baker"}
                 </p>
               </div>
             )}

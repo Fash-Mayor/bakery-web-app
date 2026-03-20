@@ -15,6 +15,7 @@
 - Button to jump to the top✅
 - Add categories and a "shop" section✅
 - fuck w db✅
+- move page header out of app.jsx
 - sending mail to the customer and baker (I have one emailjs template I use to send emails to whoever places an order in my app. I want to be able to send the email to not just the person placing the order but also to the email of the person that they're placing the order to.)
 - home UI & Nav
 - 3d build your cake and order from desired vendor
@@ -24,4 +25,33 @@
 
 
 ## Update
--
+
+
+
+Week 1-2: 2D Cake Builder
+├─ Create CakeBuilder.jsx component
+├─ Layer system (base cake, frosting, toppings)
+├─ Canvas rendering for preview
+├─ Convert to image functionality
+└─ Add to cart integration
+
+Week 3+: Optional 3D Preview (if desired)
+├─ Integrate Three.js
+├─ Load 3D cake model
+├─ Sync customizations from 2D builder
+└─ Screenshot functionality
+
+Quick Tech Recommendation
+For your bakery app, I'd use:
+
+Aspect - Choice - Why
+2D Editor - Fabric.js + React - Powerful, easy to learn
+Image Conversion - html2canvas - Simple, no backend needed
+3D (optional) - Three.js - Industry standard
+Storage - Supabase (existing) - Already using it
+
+Would you like me to:
+✅ Build a 2D cake builder (recommended start - 100 lines of React)
+🎬 Show a quick demo of how it would work
+🏗️ Set up the full architecture (component structure + state management)
+📊 Create comparison chart of pros/cons in detail

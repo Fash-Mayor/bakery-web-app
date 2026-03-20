@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from "react-router-dom";
-import { ProductCatalog, ShoppingCart, Checkout, ProductDetail, Feedback, Footer, Shop, BakerSignup, BakerProfile, Login } from './components';
+import { ProductCatalog, ShoppingCart, Checkout, ProductDetail, Feedback, Footer, Shop, BakerSignup, BakerProfile, Login, BuildCake, ScrollToTop } from './components';
 import { BakerAuthProvider, useBakerAuth } from './context/BakerAuthContext';
 import { signOutUser } from './utils/dataService';
 import { toast } from 'react-toastify';
 import { FaHome } from "react-icons/fa";
-import { IoCart } from "react-icons/io5";
+import { IoCart, IoConstruct  } from "react-icons/io5";
 import { FaShop } from "react-icons/fa6";
-import { MdFeedback } from "react-icons/md";
-import { MdLogout } from "react-icons/md";
+import { MdFeedback, MdLogout } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import { CiShop } from "react-icons/ci";
 
 // Move PageHeader out of App to keep component identity stable
 const PageHeader = ({ searchQuery, setSearchQuery, cartItems, onLoginClick, onSignOutClick }) => {
@@ -73,6 +73,16 @@ const PageHeader = ({ searchQuery, setSearchQuery, cartItems, onLoginClick, onSi
                     </span>
                   )}
                   <span className="text-xs lg:text-base font-medium">Cart</span>
+                </div>
+              </Link>
+
+              <Link
+                to="/build-cake"
+                className="flex-1 text-center hover:text-orange-600 transition px-2 py-2 rounded-lg hover:bg-orange-50 lg:hover:bg-transparent"
+              >
+                <div className="inline-flex flex-col items-center lg:flex-row lg:justify-center lg:gap-2">
+                  <IoConstruct className="text-2xl lg:text-xl text-orange-600" />
+                  <span className="text-xs lg:text-base font-medium">Build Cake</span>
                 </div>
               </Link>
 
@@ -174,6 +184,7 @@ function AppContent() {
 
   return (
     <>
+      <ScrollToTop />
       <PageHeader
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -209,6 +220,7 @@ function AppContent() {
           <Route path="/login" element={<Login />} />
           <Route path="/become-baker" element={<BakerSignup />} />
           <Route path="/baker-profile/:bakerId" element={<BakerProfile />} />
+          <Route path="/build-cake" element={<BuildCake />} />
         </Routes>
       </main>
       <Footer isLoggedIn={!!baker} onSignInClick={handleLoginClick} />
