@@ -11,6 +11,8 @@ import BakerProfile from "./BakerProfile";
 import Login from "./Login";
 import BuildCake from "./BuildCake";
 import ScrollToTop from "./ScrollToTop";
+import Navbar from "./Navbar";
+import CompleteProfile from "./CompleteProfile";
 
 export {
     ProductCatalog,
@@ -25,4 +27,6 @@ export {
     Login,
     BuildCake,
     ScrollToTop,
+    Navbar,
+    CompleteProfile,
 }

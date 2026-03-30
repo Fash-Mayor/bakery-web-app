@@ -15,19 +15,17 @@
 - Button to jump to the top✅
 - Add categories and a "shop" section✅
 - fuck w db✅
-- move page header out of app.jsx
-- sending mail to the customer and baker (I have one emailjs template I use to send emails to whoever places an order in my app. I want to be able to send the email to not just the person placing the order but also to the email of the person that they're placing the order to.)
-- home UI & Nav
-- 3d build your cake and order from desired vendor
+- move page header out of app.jsx✅
+- dashboard == profile✅
+- home UI & Nav✅
+- 3d build your cake and order from desired vendor✅
 - scrape UI's and other implementations from odas
+- sending mail to the customer and baker (I have one emailjs template I use to send emails to whoever places an order in my app. I want to be able to send the email to not just the person placing the order but also to the email of the person that they're placing the order to.)
 - add password reset functionality
 - Change Fonts 
 
 
 ## Update
-
-
-
 Week 1-2: 2D Cake Builder
 ├─ Create CakeBuilder.jsx component
 ├─ Layer system (base cake, frosting, toppings)

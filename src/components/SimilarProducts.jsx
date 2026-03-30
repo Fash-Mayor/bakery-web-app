@@ -26,18 +26,21 @@ const SimilarProducts = ({ currentProductId, currentCategory }) => {
     loadSimilarProducts();
   }, [currentProductId, currentCategory]);
 
-  if (loading || similar.length === 0) {
-    return null; // Don't render if no similar products
-  }
-
-  const itemsPerView = 3; // Show 3 products at a time on desktop, adjust as needed
+  // Define constants for the hook
+  const itemsPerView = 3; 
   const maxScroll = Math.max(0, similar.length - itemsPerView);
 
+  // ✅ FIX: Hooks must be called before any early returns
   const handlers = useSwipeable({
     onSwipedLeft: () => setScrollIndex((prev) => Math.min(prev + 1, maxScroll)),
     onSwipedRight: () => setScrollIndex((prev) => Math.max(prev - 1, 0)),
     trackMouse: true,
   });
+
+  // ✅ Conditional return happens AFTER all hooks are declared
+  if (loading || similar.length === 0) {
+    return null; 
+  }
 
   return (
     <div className="mt-12 pt-8 border-t">

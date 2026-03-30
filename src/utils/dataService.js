@@ -8,7 +8,7 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     console.error('Missing Supabase environment variables. Please check your .env file.');
 }
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ============== PRODUCT SERVICES ==============
 
@@ -123,12 +123,31 @@ export const fetchBakerProfile = async (bakerId) => {
             .from('baker')
             .select('*')
             .eq('id', bakerId)
-            .single();
+            .maybeSingle();
 
         if (error) throw error;
         return data;
     } catch (error) {
         console.error('Error fetching baker profile:', error);
+        throw error;
+    }
+};
+
+/**
+ * Fetch all bakers (for selecting where an order goes).
+ * @returns {Promise<Array<{id: string, shop_name: string}>>}
+ */
+export const fetchAllBakers = async () => {
+    try {
+        const { data, error } = await supabase
+            .from("baker")
+            .select("id, shop_name")
+            .order("shop_name", { ascending: true });
+
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error("Error fetching bakers:", error);
         throw error;
     }
 };
