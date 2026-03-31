@@ -1,10 +1,7 @@
-import {
-  FaInstagram,
-  FaFacebookF,
-  FaTwitter,
-  FaTiktok,
-  FaArrowUp,
-} from "react-icons/fa";
+import { FaArrowUp, FaGithub, FaEnvelope } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { SiDailydotdev } from "react-icons/si";
+import { FaLocationDot, FaPhoneVolume  } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const Footer = ({ isLoggedIn, onSignInClick }) => {
@@ -18,8 +15,8 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand and Tagline */}
           <div>
-            <h3 className="text-xl font-bold mb-2">Sweet Delights Bakery</h3>
-            <p className="text-gray-300">Freshly baked goods with love</p>
+            <h3 className="text-xl font-bold mb-2">Bakery Mart</h3>
+            <p className="text-gray-300">Find the best baked goods and bakers</p>
           </div>
 
           {/* Quick Links */}
@@ -41,32 +38,16 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
                   About Us
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="hover:text-orange-400 transition"
-                >
-                  Contact
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* Customer Support */}
+          {/* Customer and baker Support */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Customer Support</h4>
+            <h4 className="text-lg font-semibold mb-4">Customer / Baker Support</h4>
             <ul className="space-y-2">
               <li>
                 <Link to="/faq" className="hover:text-orange-400 transition">
                   FAQ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/returns"
-                  className="hover:text-orange-400 transition"
-                >
-                  Returns Policy
                 </Link>
               </li>
               <li>
@@ -80,7 +61,7 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
                     onClick={onSignInClick}
                     className="hover:text-orange-400 transition cursor-pointer"
                   >
-                    Sign In
+                    Sign In / Create a Stall
                   </button>
                 </li>
               )}
@@ -91,11 +72,14 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <p className="text-gray-300 mb-2">
-              123 Bakery Street, Sweet City, SC 12345
+              <FaLocationDot size={21} className="inline" /> Vercel
             </p>
-            <p className="text-gray-300 mb-2">Phone: (555) 123-4567</p>
-            <p className="text-gray-300 mb-2">Email: info@sweetdelights.com</p>
-            <p className="text-gray-300">Hours: Mon-Sat 8AM-8PM, Sun 9AM-6PM</p>
+            <p className="text-gray-300 mb-2">
+              <FaPhoneVolume size={21} className="inline" /> (234) 810-0863-195
+            </p>
+            <p className="text-gray-300 mb-2">
+              <FaEnvelope size={21} className="inline" /> info@bakerymart.com
+            </p>
           </div>
         </div>
 
@@ -103,8 +87,7 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
         <div className="mt-8 pt-8 border-t border-gray-700">
           <h4 className="text-lg font-semibold mb-4">Delivery Information</h4>
           <p className="text-gray-300">
-            We deliver within a 10-mile radius. Delivery fee: ₦1000. Free pickup
-            available at our location.
+            Delivery is dependent entirely on the business owner and has nothing to do with us.
           </p>
         </div>
 
@@ -112,62 +95,36 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
         <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
           <div className="flex space-x-4 mb-4 md:mb-0">
             <a
-              href="https://instagram.com"
+              href="https://github.com/Fash-Mayor"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-orange-400 transition"
             >
-              <FaInstagram size={24} />
+              <FaGithub   size={24} />
             </a>
             <a
-              href="https://facebook.com"
+              href="https://x.com/_FashMayor"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-orange-400 transition"
             >
-              <FaFacebookF size={24} />
+              <FaXTwitter size={24} />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://app.daily.dev/fash_mayor"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-orange-400 transition"
             >
-              <FaTwitter size={24} />
+              <SiDailydotdev size={24} />
             </a>
-            <a
-              href="https://tiktok.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-orange-400 transition"
-            >
-              <FaTiktok size={24} />
-            </a>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <span className="text-gray-300">We accept:</span>
-            <div className="flex space-x-2">
-              <span className="bg-white text-black px-2 py-1 rounded text-xs font-bold">
-                VISA
-              </span>
-              <span className="bg-white text-black px-2 py-1 rounded text-xs font-bold">
-                MC
-              </span>
-              <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">
-                PayPal
-              </span>
-              <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">
-                Cash
-              </span>
-            </div>
           </div>
         </div>
 
         {/* Copyright and Back to Top */}
         <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-300">
-            &copy; {new Date().getFullYear()} Sweet Delights Bakery. All rights
+            &copy; {new Date().getFullYear()} Bakery Mart. All rights
             reserved.
           </p>
           <button

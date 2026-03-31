@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
+let productsCache = null;
+let bakersCache = null;
+
 // Initialize Supabase client
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -8,7 +11,7 @@ if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     console.error('Missing Supabase environment variables. Please check your .env file.');
 }
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ============== PRODUCT SERVICES ==============
 
@@ -18,8 +21,12 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
  * @param {string} category - Optional category filter
  * @returns {Promise<Array>} Array of products
  */
-export const fetchAllProducts = async (searchQuery = '', category = null) => {
+export const fetchAllProducts = async (searchQuery = '', category = null, forceRefresh = false) => {
     try {
+        if (productsCache && !forceRefresh) {
+            console.log("Serving products from cache...");
+            return productsCache;
+        }
         let query = supabase
             .from('product')
             .select('*, baker(id, shop_name), tags(tag_name)');
@@ -40,7 +47,7 @@ export const fetchAllProducts = async (searchQuery = '', category = null) => {
                 return combined.includes(q);
             });
         }
-
+        productsCache = data; // Cache the products
         return data || [];
     } catch (error) {
         console.error('Error fetching products:', error);
@@ -74,14 +81,19 @@ export const fetchProductById = async (productId) => {
  * @param {string} bakerId - Baker ID (UUID)
  * @returns {Promise<Array>} Array of baker's products
  */
-export const fetchBakerProducts = async (bakerId) => {
+export const fetchBakerProducts = async (bakerId, forceRefresh = false) => {
     try {
+        if (bakersCache && !forceRefresh) {
+            console.log("Serving products from cache...");
+            return bakersCache;
+        }
         const { data, error } = await supabase
             .from('product')
             .select('*, tags(tag_name)')
             .eq('baker_id', bakerId);
 
         if (error) throw error;
+        bakersCache = data; // Cache the baker's products
         return data || [];
     } catch (error) {
         console.error('Error fetching baker products:', error);
@@ -123,12 +135,31 @@ export const fetchBakerProfile = async (bakerId) => {
             .from('baker')
             .select('*')
             .eq('id', bakerId)
-            .single();
+            .maybeSingle();
 
         if (error) throw error;
         return data;
     } catch (error) {
         console.error('Error fetching baker profile:', error);
+        throw error;
+    }
+};
+
+/**
+ * Fetch all bakers (for selecting where an order goes).
+ * @returns {Promise<Array<{id: string, shop_name: string}>>}
+ */
+export const fetchAllBakers = async () => {
+    try {
+        const { data, error } = await supabase
+            .from("baker")
+            .select("id, shop_name")
+            .order("shop_name", { ascending: true });
+
+        if (error) throw error;
+        return data || [];
+    } catch (error) {
+        console.error("Error fetching bakers:", error);
         throw error;
     }
 };
