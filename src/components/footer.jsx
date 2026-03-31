@@ -61,7 +61,7 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
                     onClick={onSignInClick}
                     className="hover:text-orange-400 transition cursor-pointer"
                   >
-                    Sign In
+                    Sign In / Create a Stall
                   </button>
                 </li>
               )}
@@ -95,23 +95,15 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
         <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
           <div className="flex space-x-4 mb-4 md:mb-0">
             <a
-              href="#"
+              href="https://github.com/Fash-Mayor"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-orange-400 transition"
             >
               <FaGithub   size={24} />
             </a>
-            {/* <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-orange-400 transition"
-            >
-              <FaFacebookF size={24} />
-            </a> */}
             <a
-              href="#"
+              href="https://x.com/_FashMayor"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-orange-400 transition"
@@ -119,7 +111,7 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
               <FaXTwitter size={24} />
             </a>
             <a
-              href="#"
+              href="https://app.daily.dev/fash_mayor"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-orange-400 transition"
@@ -127,24 +119,6 @@ const Footer = ({ isLoggedIn, onSignInClick }) => {
               <SiDailydotdev size={24} />
             </a>
           </div>
-
-          {/* <div className="flex items-center space-x-4">
-            <span className="text-gray-300">We accept:</span>
-            <div className="flex space-x-2">
-              <span className="bg-white text-black px-2 py-1 rounded text-xs font-bold">
-                VISA
-              </span>
-              <span className="bg-white text-black px-2 py-1 rounded text-xs font-bold">
-                MC
-              </span>
-              <span className="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold">
-                PayPal
-              </span>
-              <span className="bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">
-                Cash
-              </span>
-            </div>
-          </div> */}
         </div>
 
         {/* Copyright and Back to Top */}

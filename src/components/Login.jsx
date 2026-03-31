@@ -56,7 +56,7 @@ const Login = () => {
       if (!profile) {
         navigate("/complete-profile");
       } else {
-        navigate("/baker-profile");
+        navigate(`/baker-profile/${data.user.id}`);
       }
 
     } catch (error) {

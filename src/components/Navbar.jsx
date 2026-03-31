@@ -96,7 +96,7 @@ const Navbar = ({ searchQuery, setSearchQuery, cartItems, onLoginClick, onSignOu
               </Link>
 
               {/* Baker Only Links */}
-              {baker ? (
+              {baker && (
                 <>
                   <Link
                     to={`/baker-profile/${baker.id}`}
@@ -118,16 +118,6 @@ const Navbar = ({ searchQuery, setSearchQuery, cartItems, onLoginClick, onSignOu
                     </div>
                   </button>
                 </>
-              ) : (
-                /* Visible on all screens when not logged in */
-                <button
-                  onClick={onLoginClick}
-                  className="flex-1 text-center hover:text-orange-600 transition px-2 py-2 rounded-lg hover:bg-orange-50 lg:hover:bg-transparent"
-                >
-                  <div className="inline-flex flex-col items-center lg:flex-row lg:justify-center lg:gap-2">
-                    <span className="text-xs lg:text-base font-semibold">Create a Stall</span>
-                  </div>
-                </button>
               )}
             </div>
           </div>
