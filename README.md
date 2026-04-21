@@ -1,80 +1,59 @@
-# Bakery Web App
+# 🍰 Modern Bakery Platform
 
-A modern, responsive frontend-only bakery e-commerce application built with React. Browse bakery products, add items to your cart, and place orders via email or WhatsApp.
+A full-stack Progressive Web App (PWA) designed to bridge the gap between creative cake design and seamless bakery management. This platform enables customers to architect their own cakes in a simulated space while providing bakers with a robust backend to manage orders and inventory.
 
-## Features
+---
 
-- **Product Catalog**: Browse cakes, muffins, and ice cream with images, prices, and details.
-- **Shopping Cart**: Add/remove items, persist cart in localStorage.
-- **Checkout**: Submit orders with customer details and delivery info.
-- **Order Notifications**: Send order confirmations via EmailJS or WhatsApp.
-- **Responsive Design**: Mobile-friendly with Tailwind CSS.
-- **Navigation**: React Router for seamless page transitions.
+## 🚀 The "Crown Jewel": Interactive Cake Builder
+The heart of the application is a custom-built, canvas-based design engine.
 
-## Tech Stack
+* **Fabric.js Integration**: A high-performance interactive canvas allows users to drag, resize, and rotate cake layers in real-time.
+* **Faux-3D Architecture**: Implements depth-layering logic to simulate realistic cake tiers using offset shapes, stroke weights, and shadows.
+* **Physics-Based Frosting**: Dynamic generation of frosting drips using randomized geometry to simulate realistic decorative elements.
+* **Custom Texture Mapping**: Supports user-uploaded patterns mapped directly onto geometric shapes using `fabric.Pattern`.
+* **The WhatsApp Bridge**: Once a design is finalized, the engine exports a high-resolution PNG to Supabase Storage and generates an automated order payload sent directly to the baker via WhatsApp.
 
-- **Frontend**: React 19, Vite
-- **Styling**: Tailwind CSS
-- **Routing**: React Router DOM
-- **Icons**: React Icons
-- **Email Integration**: EmailJS
-- **Notifications**: React Toastify
+---
 
-## Installation
+## 🛠️ The Tech Stack
+* **Frontend**: React with Tailwind CSS for a responsive, "mobile-first" experience.
+* **Canvas Engine**: Fabric.js for complex object manipulation and image export.
+* **Backend & Auth**: Supabase (PostgreSQL) handling relational data, user sessions, and image hosting.
+* **State Management**: Optimized React hooks for real-time design updates.
+* **Caching**: Custom **SWR (Stale-While-Revalidate)** pattern implemented at the service level for instant page transitions.
 
-1. Clone the repository:
+---
+
+## 🏗️ Backend Growth & Architecture
+The project has evolved from a static frontend to a dynamic, scalable "Engine Room."
+
+### 1. SQL Schema Evolution
+Moved from hardcoded data to a dynamic relational PostgreSQL database. The schema is built on a **"Provider" model**, allowing the platform to scale from a single bakery to a multi-vendor marketplace.
+
+### 2. Authentication & Security
+Integrated Supabase Auth to handle secure logins for both bakers and customers, enabling role-based views and protected routes.
+
+### 3. API Orchestration
+Developed a clean API layer using Supabase client calls to fetch products, handle high-res image uploads, and manage order metadata dynamically.
+
+---
+
+## ⚡ Performance Optimization: SWR Pattern
+To ensure a "native app" feel, the platform uses a **Browser-Level SWR Cache**:
+* **Instant UI**: Serves "stale" data from memory immediately during internal navigation.
+* **Background Revalidation**: Silently fetches fresh data from the backend to update the UI without jarring loading spinners.
+* **Execution Velocity**: Drastically reduces unnecessary API calls, keeping the app fast and cost-efficient.
+
+---
+
+## 🛠️ Installation & Setup
+
+1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
-   cd bakery-web-app
+   git clone [repository-url]
    ```
-
-2. Install dependencies:
+2. **Install dependencies:**:
    ```bash
-   npm install
+   nom install
    ```
-
-3. Set up environment variables (create `.env` file):
-   ```
-   VITE_EMAIL_SERVICE_ID=your_emailjs_service_id
-   VITE_EMAIL_TEMPLATE_ID=your_emailjs_template_id
-   VITE_PUBLIC_KEY=your_emailjs_public_key
-   VITE_WHATSAPP_NUMBER=your_whatsapp_number
-   ```
-
-## Usage
-
-1. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-2. Open [http://localhost:5173](http://localhost:5173) in your browser.
-
-3. Browse products, add to cart, and checkout.
-
-## Scripts
-
-- `npm run dev`: Start development server
-- `npm run build`: Build for production
-- `npm run preview`: Preview production build
-- `npm run lint`: Run ESLint
-
-## Project Structure
-
-```
-bakery-web-app/
-├── src/
-│   ├── components/     # React components (ProductCatalog, ShoppingCart, etc.)
-│   ├── data/           # Products data
-│   ├── utils/          # Email and WhatsApp services
-│   └── ...
-├── public/assets/      # Product images
-└── ...
-```
-
-## Updates
-
-1. Change Fonts.
-2. A categories section containing sections like `Pastries`, `Cakes`, `Bread` (and a `shop` section) .
-3. A minimizable pop-up asking users how to improve the site (collapsable).
-4. Add a `Product page`. This page will contain details abou individual products.
+3. **Environment Variables**
