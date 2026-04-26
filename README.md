@@ -54,6 +54,21 @@ To ensure a "native app" feel, the platform uses a **Browser-Level SWR Cache**:
    ```
 2. **Install dependencies:**:
    ```bash
-   nom install
+   npm install
    ```
-3. **Environment Variables**
+3. **Environment Variables**:Create a .env file in the root directory and add your Supabase credentials:
+   ```bash
+   VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+4. **Run development server**:
+   ```bash
+   npm run dev
+   ```
+
+## 📈 Roadmap:
+## Baker Dashboard: Internal management tools for taking inventory, stocks, and profit/loss calculation.
+## Dynamic Pricing: Real-time cost calculation based on cake size, tiers, and decorative complexity.
+## Real-time Order Tracking: Live status updates for customers from "Baking" to "Out for Delivery."
+
+** Maintained by Mayor. Focused on technical excellence, execution velocity, and building scalable startup solutions.**
