@@ -1,10 +1,31 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import { ProductCatalog, ShoppingCart, Checkout, ProductDetail, Feedback, Footer, Shop, BakerSignup, BakerProfile, Login, BuildCake, ScrollToTop, Navbar, CompleteProfile } from './components';
-import { BakerAuthProvider, useBakerAuth } from './context/BakerAuthContext';
-import { signOutUser } from './utils/dataService';
-import { toast } from 'react-toastify';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+import {
+  ProductCatalog,
+  ShoppingCart,
+  Checkout,
+  ProductDetail,
+  Feedback,
+  Footer,
+  Shop,
+  BakerSignup,
+  BakerProfile,
+  Login,
+  BuildCake,
+  ScrollToTop,
+  Navbar,
+  CompleteProfile,
+  PWAInstallPrompt,
+} from "./components";
+import { BakerAuthProvider, useBakerAuth } from "./context/BakerAuthContext";
+import { signOutUser } from "./utils/dataService";
+import { toast } from "react-toastify";
 
 function AppContent() {
   // Initialize cart from localStorage
@@ -12,7 +33,7 @@ function AppContent() {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const { logoutBaker, baker } = useBakerAuth();
 
@@ -23,7 +44,7 @@ function AppContent() {
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
-            : item
+            : item,
         );
       } else {
         return [...prev, { ...product, quantity: 1 }];
@@ -32,18 +53,18 @@ function AppContent() {
   };
 
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleSignOut = async () => {
     try {
       await signOutUser();
       logoutBaker();
-      toast.success('Signed out successfully!');
-      navigate('/');
+      toast.success("Signed out successfully!");
+      navigate("/");
     } catch (error) {
-      console.error('Error signing out:', error);
-      toast.error('Failed to sign out');
+      console.error("Error signing out:", error);
+      toast.error("Failed to sign out");
     }
   };
 
@@ -55,7 +76,7 @@ function AppContent() {
   return (
     <>
       <ScrollToTop />
-      
+
       {/* Replaced PageHeader with our new Navbar component */}
       <Navbar
         searchQuery={searchQuery}
@@ -69,11 +90,18 @@ function AppContent() {
         <Routes>
           <Route
             path="/"
-            element={<ProductCatalog onAddToCart={handleAddToCart} searchQuery={searchQuery} />}
+            element={
+              <ProductCatalog
+                onAddToCart={handleAddToCart}
+                searchQuery={searchQuery}
+              />
+            }
           />
           <Route
             path="/cart"
-            element={<ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />}
+            element={
+              <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
+            }
           />
           <Route
             path="/product/:id"
@@ -81,10 +109,15 @@ function AppContent() {
           />
           <Route
             path="/checkout"
-            element={<Checkout cartItems={cartItems} setCartItems={setCartItems} />}
+            element={
+              <Checkout cartItems={cartItems} setCartItems={setCartItems} />
+            }
           />
           <Route path="/feedback" element={<Feedback />} />
-          <Route path="/shop" element={<Shop onAddToCart={handleAddToCart} />} />
+          <Route
+            path="/shop"
+            element={<Shop onAddToCart={handleAddToCart} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/become-baker" element={<BakerSignup />} />
           <Route path="/baker-profile/:bakerId" element={<BakerProfile />} />
@@ -93,6 +126,7 @@ function AppContent() {
         </Routes>
       </main>
       <Footer isLoggedIn={!!baker} onSignInClick={handleLoginClick} />
+      <PWAInstallPrompt />
     </>
   );
 }

@@ -13,6 +13,7 @@ import BuildCake from "./BuildCake";
 import ScrollToTop from "./ScrollToTop";
 import Navbar from "./Navbar";
 import CompleteProfile from "./CompleteProfile";
+import PWAInstallPrompt from "./PWAInstallPrompt";
 
 export {
     ProductCatalog,
@@ -29,4 +30,5 @@ export {
     ScrollToTop,
     Navbar,
     CompleteProfile,
+    PWAInstallPrompt,
 }
