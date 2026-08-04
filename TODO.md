@@ -1,8 +1,19 @@
+## PWA FIX PLAN (in progress)
+
+1. ✅ Capture `beforeinstallprompt` at module scope — the event fires before React mounts on slow/hosted loads, so the `useEffect` listener misses it (this is why it works locally but not after hosting).
+2. ✅ Register the service worker immediately at module load (`immediate: true`) so install/update detection is ready ASAP.
+3. ✅ Add iOS Safari "Add to Home Screen" fallback banner (iOS doesn't fire `beforeinstallprompt` at all).
+4. ✅ Improve update banner wiring (refreshPending capture + onRegisterError handling + manifest `id`).
+5. ✅ Rebuilt production bundle (`npm run build`) and confirmed `manifest.webmanifest` (with `id`), `sw.js`, and the module-scope event capture are all present in `dist/`.
+6. ⬜ Redeploy to Vercel and verify install button + update banner on phone.
+
 ## BEFORE DEPOLMENT:
-- 
+
+-
 
 ## Todo
-- A section to ask peps what to do to improve site; justa collapsable section that can be taken up and down, it writesthe feedback into a file and sends it to...(more on that) (spreadsheet?)✅ 
+
+- A section to ask peps what to do to improve site; justa collapsable section that can be taken up and down, it writesthe feedback into a file and sends it to...(more on that) (spreadsheet?)✅
 - Sends as mail to me.✅
 - Home page UI up.✅
 - footer✅
@@ -25,10 +36,10 @@
 - scrape UI's and other implementations from odas
 - sending mail to the customer and baker (I have one emailjs template I use to send emails to whoever places an order in my app. I want to be able to send the email to not just the person placing the order but also to the email of the person that they're placing the order to.)
 - add password reset functionality
-- Change Fonts 
-
+- Change Fonts
 
 ## Update
+
 Week 1-2: 2D Cake Builder
 ├─ Create CakeBuilder.jsx component
 ├─ Layer system (base cake, frosting, toppings)

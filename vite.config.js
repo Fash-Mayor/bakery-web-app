@@ -12,6 +12,7 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png'],
       manifest: {
+        id: '/',
         name: 'The Bakery | Fresh Cakes & Orders',
         short_name: 'The Bakery',
         description: 'Order custom cakes and bakery delights. Built with React and zero backend logic—frontend is evolving.',
